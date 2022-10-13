@@ -26,12 +26,13 @@ const itemsContainer = document.querySelector(".items-container");
 console.log(itemsContainer);
 
 for (let i = 0; i < sliderImages.length; i++) {
+    //Creo immagini
     const elementImg = sliderImages[i];
     const element = 
     `<div class="item">
         <img src="${elementImg}" alt="">
     </div>`
-    
+
     itemsContainer.innerHTML += element;
 }
 
@@ -44,34 +45,41 @@ items[sliderPosition].classList.add("active");
 // Al click sul bottone next vedo immagine successiva
 const nextBtn = document.querySelector(".next");
 nextBtn.addEventListener("click", function() {
+
+    //Tolgo class active all'immagine corrente
+    items[sliderPosition].classList.remove("active");
+
     //Se posso andare avanti 
     if(sliderPosition < (items.length - 1)) {
-
-        //Tolgo class active all'immagine corrente
-        items[sliderPosition].classList.remove("active");
-
         //Incremento poi sliderPosition di 1
         sliderPosition++;
-
-        //Aggiungo classe active all'immagine da visualizzare
-        items[sliderPosition].classList.add("active");
+    } else {
+        //Riparto dal primo elemento
+        sliderPosition = 0;
     }
+
+     //Aggiungo classe active all'immagine da visualizzare
+     items[sliderPosition].classList.add("active");
 });
 
 // INDIETRO
 // Al click sul bottone prev vedo immagine precedente
 const prevBtn = document.querySelector(".prev");
 prevBtn.addEventListener("click", function() {
+
+    //Tolgo class active all'immagine corrente
+    items[sliderPosition].classList.remove("active");
+
     //Se posso andare indietro
     if(sliderPosition > 0) {
-        //Tolgo class active all'immagine corrente
-        items[sliderPosition].classList.remove("active");
-
         //Decremento di 1 sliderPosition
         sliderPosition--;
-
-        //Aggiungo class active all'immagine da visualizzare
-        items[sliderPosition].classList.add("active");
+    } else {
+        //Riparto dall'ultimo elemento
+        sliderPosition = sliderImages.length - 1;
     }
+
+    //Aggiungo class active all'immagine da visualizzare
+    items[sliderPosition].classList.add("active");
 });
 
